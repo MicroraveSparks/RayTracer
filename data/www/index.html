@@ -1,0 +1,138 @@
+<!DOCTYPE HTML><html>
+<head>
+  <title>Raytracer Control Panel</title>
+  <link rel="icon" href="static/stingrayx32.png">
+  <link rel="stylesheet" href="static/bootstrap-5.0.2-dist/css/bootstrap.css">
+  <link rel="stylesheet" href="static/css/style.css">
+  <script src="static/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+  <script type="module" src="static/js/main.js"></script>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+  <div class="alert" role="alert" id="safety-status"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <center>
+        <div class="row">
+          <h2>Raytracer Control Panel</h2>
+        </div>
+        <div class="row">
+          <div class="col" %ADMINONLY%>
+            <a href="/modem-info" class="btn btn-outline-info">Modem Info</a>
+          </div>
+          <div class="col" %ADMINONLY%>
+            <a href="/logs" class="btn btn-outline-info">Logs</a>
+          </div>
+          <div class="col text-end">
+            <button onclick="logout()" class="btn btn-outline-danger">Logout</button>
+          </div>
+        </div>
+      </center>
+    </div>
+  </div>
+  <hr/>
+  <div class="container-sm">
+    <div class="form-check form-switch">
+      <label class="form-check-label">Raytracer Status: <span id="state" class="state badge"></span></label>
+      <input class="form-check-input" type="checkbox" onchange="toggleFeature(this)" id="start" %ISRUNNING%>
+    </div>
+    <hr/>
+    <div class="container-fluid" style="border: 1px solid #ccc;">
+      <div class="row">
+        <div class="col">
+          <h3>Instructions</h3>
+          <p>Use the toggle switch above to start or pause the raytracer. When the raytracer is running, the status will show "Running" and the badge will be green. When paused, the status will show "Paused" and the badge will be yellow.</p>
+        </div>
+      </div>
+
+    </div>
+    <button class="btn btn-primary mt-3" type="button" data-bs-toggle="collapse" data-bs-target="#advancedCollapse" aria-expanded="false" aria-controls="advancedCollapse">
+      Advanced settings
+    </button>
+    <div id="advancedCollapse" class="collapse">
+      <div class="card card-body">
+        %HEURISTICS%
+      </div>
+    </div>
+  </div>
+<hr/>
+<div class="container-fluid bg-light fontsize-footer">
+<div class="container-fluid">
+<div class="row">
+  <center>
+  <p>Created by MicroSparks - <a href="https://github.com/MicroSparks">GitHub</a></p>
+  </center>
+</div>
+<div class="row">
+  <div class="col-md-4">
+        Credits
+        <div class="row">
+          <a href="https://www.flaticon.com/free-icons/stingray" title="stingray icons">Stingray icons created by Freepik - Flaticon</a>
+        </div>
+      </div>
+      <div class="col-md-4">
+        Source Code
+        <div class="row">
+          <a href="https://github.com/MicroSparks/Raytracer">GitHub</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  window.onload = function() {
+    var state = document.getElementById("state").textContent.trim();
+    var stateElement = document.getElementById("state");
+    if (state === "Running") {
+      stateElement.classList.add("bg-success");
+      stateElement.classList.remove("bg-warning");
+    } else if (state === "Paused") {
+      stateElement.classList.add("bg-warning");
+      stateElement.classList.remove("bg-success");
+    }
+  };
+  function listDir(path) {
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/list?dir=" + encodeURIComponent(path), true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        var files = xhr.responseText;
+        console.log(responseText);
+      }
+    };
+    xhr.send();
+  }
+
+  function toggleFeature(element) {
+      var xhr = new XMLHttpRequest();
+      if(element.checked){ 
+          xhr.open("GET", "/"+element.id+"?state=1", true);
+          if (element.id === "start") {
+            const stateElements = document.getElementsByClassName("state");
+            for (let i = 0; i < stateElements.length; i++) {
+                stateElements[i].innerHTML = "Running";
+                stateElements[i].classList.add("bg-success");
+                stateElements[i].classList.remove("bg-warning");
+            }
+          }
+      }
+      else {
+          xhr.open("GET", "/"+element.id+"?state=0", true);
+          const stateElements = document.getElementsByClassName("state");
+          if (element.id === "start") {
+            for (let i = 0; i < stateElements.length; i++) {
+                stateElements[i].innerHTML = "Paused";
+                stateElements[i].classList.add("bg-warning");
+                stateElements[i].classList.remove("bg-success");
+            }
+          }
+      }
+    xhr.send();
+  }
+
+  function logout() {
+    window.location.href = "/logout";
+  }
+</script>
+</body>
+</html>

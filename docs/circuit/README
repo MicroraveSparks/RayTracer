@@ -1,0 +1,23 @@
+# Circuit Wiring Diagrams
+
+**Basic Components Required**
+- 1x NodeMCU ESP32 Development board
+- 1x LED (To show running status)
+- 1x Quectel EG25-G LTE Modem
+- 1x HW-125 Micro SD Card Module
+    - Requires SD card with $\geq$ __MB of storage
+
+**Basic Diagram**
+
+
+### **1)** DC Power Source
+**Additional Components Required**
+- 1x 5V output DC Power Module
+    - I have tested with the Elegoo ARD-POWERMOD
+
+### **2)** USB Battery Pack Power Source
+
+### **3)** Custom Power Source
+You are free to use your own power source for the project, just ensure you are only feeding a maximum of 5V into your components so you don't fry anything. \
+\
+Also, be sure you can power off or disconnect your power source before flashing the program code onto your board, or you may run into issues with some boards.

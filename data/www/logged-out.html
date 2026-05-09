@@ -1,0 +1,29 @@
+<!DOCTYPE HTML><html>
+<head>
+  <title>Logged Out 🔒</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>
+    window.onload = function() {
+      var timeoutDuration = 5 * 1000; // 5 seconds in milliseconds
+      var countdown;
+
+      countdown = setInterval(function() {
+        timeoutDuration -= 1000; // Decrease by 1 second
+        document.getElementById("countdown").textContent = Math.ceil(timeoutDuration / 1000); // Update countdown display
+        if (timeoutDuration <= 0) {
+          clearInterval(countdown);
+          window.location.href = "/"; // Redirect to homepage after countdown
+        }
+      }, 1000);
+
+      setTimeout(function() {
+        window.location.href = "/"; // Redirect to homepage after 5 seconds
+      }, timeoutDuration);
+    };
+  </script>
+</head>
+<body>
+  <p>Logged out<a href="/login">return to login</a>.</p>
+  <p><strong>Note:</strong> this page will automatically redirect to the login page in <span id="countdown">5</span> seconds.</p>
+</body>
+</html>

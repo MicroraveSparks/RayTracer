@@ -1,0 +1,36 @@
+<!DOCTYPE HTML><html>
+<head>
+  <link rel="icon" href="static/stingrayx32.png">
+  <link rel="stylesheet" href="static/bootstrap-5.0.2-dist/css/bootstrap.css">
+  <script src="static/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+  <title>Raytracer Login 🔒</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script type="module" src="static/js/login.js"></script>
+</head>
+<body>
+    <div class="container-fluid">
+      <div class="row">
+          <center>
+            <h2>Log In</h2>
+          </center>
+        </div>
+        <div class="row">
+          <center>
+            <div class="card" style="width: 18rem;">
+                <form id="login" class="card-body" action="/login" method="post">
+                    <div class="mb-3">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="username" required>
+                    </div>
+                    <div class="mb-3">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" autocomplete="current-password" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Log In</button>
+                </form>
+            </div>
+          </center>
+      </div>
+    </div>
+</body>
+</html>

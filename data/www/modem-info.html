@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Modem Info 📶</title>
+  <link rel="icon" href="static/stingrayx32.png">
+  <link rel="stylesheet" href="static/bootstrap-5.0.2-dist/css/bootstrap.css">
+  <script src="static/bootstrap-5.0.2-dist/js/bootstrap.js"></script>
+  <script type="module" src="static/js/main.js"></script>
+  <style>
+    .censored {
+      background-color: #000;
+      color: #000;
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+    .censored::before {
+      content: "****";
+      letter-spacing: normal;
+      color: #fff;
+    }
+  </style>
+  <title>Modem Info 📶</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1"> 
+</head>
+<body>
+  <div class="alert" role="alert" id="safety-status"></div>
+  <div class="container-fluid">
+    <div class="row">
+      <center>
+        <h2>Modem Information</h2>
+      </center>
+    </div>
+    <div class="row">
+      <center>
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <button type="button" class="btn btn-primary", onclick="window.history.back();">
+              <i class="bi bi-arrow-return-left"></i> Back
+            </button>
+            <h5 class="card-title">Modem Details</h5>
+            <p class="card-text"><strong>Manufacturer:</strong> %MANUFACTURER%</p>
+            <p class="card-text"><strong>Model:</strong> %MODEM_MODEL%</p>
+            <p class="card-text"><strong>Firmware Version:</strong> %FIRMWARE_VERSION%</p>
+            <p class="card-text"><strong>IMEI: </strong><p class="censored" id="imei">%IMEI%</p></p><button onclick="document.getElementById('imei').classList.toggle('censored'); this.textContent = this.textContent === 'Show' ? 'Hide' : 'Show';" class="btn btn-primary">Show</button>
+            <p class="card-text"><strong>IMSI: </strong><p class="censored" id="imsi">%IMSI%</p></p><button onclick="document.getElementById('imsi').classList.toggle('censored'); this.textContent = this.textContent === 'Show' ? 'Hide' : 'Show';" class="btn btn-primary">Show</button>
+          </div>
+        </div>
+      </center>
+    </div>
+  </div>
+</body>
